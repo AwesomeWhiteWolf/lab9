@@ -1,0 +1,131 @@
+<!DOCTYPE html>  
+<html lang="ru">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>JavaScript Задания</title>  
+    <style>  
+        .red {  
+            background-color: red;  
+            border: 2px solid black;  
+            padding: 10px;  
+            margin: 5px 0;  
+        }  
+        .blue {  
+            background-color: blue;  
+            border: 2px solid red;  
+            display: inline-block;  
+            padding: 10px;  
+            margin: 5px 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <script>  
+        // Задание 1  
+        function factorial(num) {  
+            if (isNaN(num) || num < 0) {  
+                console.log("Ошибка: введено некорректное значение. Введите неотрицательное число.");  
+                return;  
+            }  
+            let result = 1;  
+            for (let i = 1; i <= num; i++) {  
+                result *= i;  
+            }  
+            return result;  
+        }  
+
+        const userInputFactorial = prompt("Введите число для вычисления факториала:");  
+        const factorialResult = factorial(Number(userInputFactorial));  
+        document.write(`<h3>Факториал числа ${userInputFactorial}: ${factorialResult}</h3>`);  
+
+        // Задание 2  
+        function createHtmlList(array) {  
+            let listHtml = "<ul>";  
+            array.forEach(item => {  
+                listHtml += `<li>${item}</li>`;  
+            });  
+            listHtml += "</ul>";  
+            return listHtml;  
+        }  
+        let userInputArray = [];  
+        while (true) {  
+            const item = prompt("Введите элемент массива (или нажмите 'Отмена' для завершения):");  
+            if (!item) break;  
+            userInputArray.push(item);  
+        }  
+        const htmlList = createHtmlList(userInputArray);  
+        document.write(htmlList);  
+
+        // Задание 3  
+        function fred(str) {  
+            return `<div class="red">${str}</div>`;  
+        }  
+        function fblue(str) {  
+            return `<div class="blue">${str}</div>`;  
+        }  
+        function fstr(array) {  
+            return array.join(", ");  
+        }  
+        function flist(array) {  
+            return createHtmlList(array);  
+        }  
+
+        const f1 = confirm("Отобразить данные в виде синих блоков? (или нажмите 'Отмена' для красных блоков)") ? fblue : fred;  
+        const f2 = confirm("Отобразить данные в виде списка?(или нажмите 'Отмена' для строки)") ? fstr : flist;  
+
+        userInputArray = [];  
+        while (true) {  
+            const item = prompt("Введите элемент для нового массива (или нажмите 'Отмена' для завершения):");  
+            if (!item) break;  
+            userInputArray.push(item);  
+        }  
+        const resultF2 = f2(userInputArray);  
+        const resultF1 = f1(resultF2);  
+        document.write(resultF1);  
+
+        // Задание 4  
+        function fgener() {  
+            let mas = [];  
+            let count = 0;  
+            return function findmas(element) {  
+                if (mas.includes(element)) {  
+                    count++;  
+                    console.log(mas, count);  
+                    return true;  
+                } else {  
+                    mas.push(element);  
+                    console.log(mas, count);  
+                    return false;  
+                }  
+            };  
+        }  
+        const findmas1 = fgener();  
+        const findmas2 = fgener();  
+        let userInputFind = prompt("Введите строку для поиска (или нажмите 'Отмена' для завершения):");  
+        while (userInputFind) {  
+            console.log(findmas1(userInputFind));  
+            userInputFind = prompt("Введите строку для поиска (или нажмите 'Отмена' для завершения):");  
+        }  
+        userInputFind = prompt("Введите строку для поиска (или нажмите 'Отмена' для завершения):");  
+        while (userInputFind) {  
+            console.log(findmas2(userInputFind));  
+            userInputFind = prompt("Введите строку для поиска (или нажмите 'Отмена' для завершения):");  
+        }  
+
+        // Задание 5  
+        const functionArray = [  
+            (num) => Math.abs(num),  
+            (num) => -Math.abs(num),  
+            (num) => num * num  
+        ];  
+        const numbersArray = [1, -2, 3, -4, 5];  
+        numbersArray.forEach(num => {  
+            functionArray.forEach(func => {  
+                const result = func(num);  
+                document.write(`<p>Результат для ${num} с функцией ${func.name}: ${result}</p>`);  
+            });  
+        });  
+    </script>  
+</body>  
+</html> 
